@@ -1,8 +1,7 @@
-@extends('layout')
 
 
-@section('content')
-    <h2>Available Jobs</h2>
+<x-layout>
+    <h1>Available Jobs</h1>
         <ul>
             @forelse($jobs as $job)
                 @if($loop->even)
@@ -14,6 +13,6 @@
                 <li>No Jobs Available!</li>
             @endforelse
         </ul>
-@endsection
+</x-layout>
 
 

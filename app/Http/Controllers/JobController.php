@@ -16,7 +16,7 @@ class JobController extends Controller
     public function index():View
     {
         $jobs = Job::all();
-        return view('jobs.index', compact('jobs'));
+        return view('jobs.index')->with('jobs', $jobs);
     }
 
     /**
@@ -38,10 +38,10 @@ class JobController extends Controller
         ]);
 
         // creating Job using tinker
-        Job::create([
-            'title' => $validatedData['title'],
-            'description' => $validatedData['description'],
-        ]);
+//        Job::create([
+//            'title' => $validatedData['title'],
+//            'description' => $validatedData['description'],
+//        ]);
 
         return redirect()->route('jobs.index');
     }
@@ -52,7 +52,7 @@ class JobController extends Controller
     public function show(Job $job):View
     {
 
-        return view('jobs.show', compact('job'));
+        return view('jobs.show')->with('job', $job);
     }
 
     /**

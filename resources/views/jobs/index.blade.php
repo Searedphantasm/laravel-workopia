@@ -4,11 +4,11 @@
     <h1>Available Jobs</h1>
         <ul>
             @forelse($jobs as $job)
-                @if($loop->even)
-                <li>Even: {{ $job }}</li>
-                @else
-                    <li>Odd: {{ $job }}</li>
-                @endif
+                <li>
+                    <a href="{{route('jobs.show',$job -> id)}}">
+                        {{ $job->title }}
+                    </a>
+                </li>
             @empty
                 <li>No Jobs Available!</li>
             @endforelse

@@ -12,6 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->validateCsrfTokens(except: ['/submit']);
+
+//        $middleware->append(\App\Http\Middleware\LogRequest::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

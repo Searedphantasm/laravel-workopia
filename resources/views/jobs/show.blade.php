@@ -14,7 +14,12 @@
                         >Edit</a
                         >
                         <!-- Delete Form -->
-                        <form method="POST">
+                        <form
+                            method="POST"
+                            action="{{ route('jobs.destroy', $job->id) }}"
+                            onsubmit="return confirm('Are you sure you want to delete this job?');"
+                        >
+                            @csrf @method('DELETE')
                             <button
                                 type="submit"
                                 class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded"
@@ -41,15 +46,18 @@
                             >Local</span
                             >
                         </li>
+                        @if($job -> tags)
                         <li class="mb-2">
                             <strong>Tags:</strong>
                             {{ ucwords(str_replace(',', ', ', $job->tags)) }}
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>
 
             <div class="container mx-auto p-4">
+                @if($job -> requirements || $job -> benefits)
                 <h2 class="text-xl font-semibold mb-4">Job Details</h2>
                 <div class="rounded-lg shadow-md bg-white p-4">
                     <h3 class="text-lg font-semibold mb-2 text-blue-500">Job Requirements</h3>
@@ -59,6 +67,7 @@
                     <h3 class="text-lg font-semibold mt-4 mb-2 text-blue-500">Benefits</h3>
                     <p>{{$job -> benefits}}</p>
                 </div>
+                @endif
                 <p class="my-5">
                     Put "Job Application" as the subject of your email and attach your resume.
                 </p>
@@ -75,16 +84,21 @@
             </div>
         </section>
         <aside class="bg-white rounded-lg shadow-md p-3">
+
             <h3 class="text-xl text-center mb-4 font-bold">Company Info</h3>
+            @if($job-> company_logo)
             <img
                 src="/images/{{$job->company_logo}}"
                 alt="{{$job->company_name}}"
                 class="w-full rounded-lg mb-4 m-auto"
             />
+            @endif
             <h4 class="text-lg font-bold">{{$job->company_name}}</h4>
+            @if($job->company_description)
             <p class="text-gray-700 text-lg my-3">
                 {{$job->company_description}}
             </p>
+            @endif
             <a href="{{$job->company_website}}" target="_blank" class="text-blue-500"
             >Visit Website</a
             >
